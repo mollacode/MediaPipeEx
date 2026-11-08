@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "version": "1.2.2",
+  "upstreamUrl": "https://github.com/google-ai-edge/mediapipe.git",
+  "upstreamCommit": "2c2d4a7454d6358e0d6f0b54e254d231fe4cc78f",
+  "patchFile": "1.2.2/source-state/changes.patch",
+  "patchSha256": "1a039e17ae95dcef94798120cfba4b130e5e36abcd37ff10d2fcf9ec0b6d318e",
+  "trackedChanges": [
+    "MODULE.bazel",
+    "mediapipe/calculators/tensor/BUILD",
+    "mediapipe/calculators/tensor/inference_runner_litert.cc",
+    "mediapipe/tasks/ios/BUILD",
+    "mediapipe/tasks/ios/ios_build_rules.bzl",
+    "mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm",
+    "third_party/BUILD",
+    "third_party/opencv_ios_source.BUILD"
+  ],
+  "intentToAdd": [],
+  "generatedInputs": [
+    "third_party/find_wig_source_built_opencv.zip"
+  ],
+  "extraSources": {
+    "MODULE.bazel.lock": "1.2.2/source-state/files/MODULE.bazel.lock",
+    "third_party/find_wig_abseil_apple_strict_header_ownership.patch": "1.2.2/source-state/files/third_party/find_wig_abseil_apple_strict_header_ownership.patch"
+  },
+  "reviewSources": {
+    "MODULE.bazel": "1.2.2/source-state/files/MODULE.bazel",
+    "MODULE.bazel.lock": "1.2.2/source-state/files/MODULE.bazel.lock",
+    "mediapipe/calculators/tensor/BUILD": "1.2.2/source-state/files/mediapipe/calculators/tensor/BUILD",
+    "mediapipe/calculators/tensor/inference_runner_litert.cc": "1.2.2/source-state/files/mediapipe/calculators/tensor/inference_runner_litert.cc",
+    "mediapipe/tasks/ios/BUILD": "1.2.2/source-state/files/mediapipe/tasks/ios/BUILD",
+    "mediapipe/tasks/ios/ios_build_rules.bzl": "1.2.2/source-state/files/mediapipe/tasks/ios/ios_build_rules.bzl",
+    "mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm": "1.2.2/source-state/files/mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm",
+    "third_party/BUILD": "1.2.2/source-state/files/third_party/BUILD",
+    "third_party/find_wig_abseil_apple_strict_header_ownership.patch": "1.2.2/source-state/files/third_party/find_wig_abseil_apple_strict_header_ownership.patch",
+    "third_party/opencv_ios_source.BUILD": "1.2.2/source-state/files/third_party/opencv_ios_source.BUILD"
+  },
+  "files": {
+    "MODULE.bazel": {
+      "sha256": "0f0a64353890572b7e25a2e5d43d803e0cbfb7e71436f00d0c160e40dd0503e3",
+      "mode": 420
+    },
+    "MODULE.bazel.lock": {
+      "sha256": "32d785f18d7c6e72f7977c8c3a49f5e01759d580676f497af1e4eccbe3df995b",
+      "mode": 420
+    },
+    "mediapipe/calculators/tensor/BUILD": {
+      "sha256": "b3da043315a7e0c1667640ec45a4196d304f4cd1804854def51cd88592a71714",
+      "mode": 420
+    },
+    "mediapipe/calculators/tensor/inference_runner_litert.cc": {
+      "sha256": "eb6c0d07b2b0d23dfbd3a61348e7350dfa4debdcc956ffd891b52c1a1931ad96",
+      "mode": 420
+    },
+    "mediapipe/tasks/ios/BUILD": {
+      "sha256": "b03ecbd4b5462d58ec0bfd780a6f40522b3f0896ed4d338289393ecc6767c044",
+      "mode": 420
+    },
+    "mediapipe/tasks/ios/ios_build_rules.bzl": {
+      "sha256": "eacb523f6022266839f314994487d05decc9aca4672813ab9f8848cf8ed68754",
+      "mode": 420
+    },
+    "mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm": {
+      "sha256": "dd19ad9dbf57e196d8df923150904d41f1734f70e154e91aafa2c5e0b7d9b960",
+      "mode": 420
+    },
+    "third_party/BUILD": {
+      "sha256": "14f5dba00745e304146c1157a244297d1abd64fca9bca7464719d835f4681be0",
+      "mode": 420
+    },
+    "third_party/find_wig_abseil_apple_strict_header_ownership.patch": {
+      "sha256": "5a294e5b3fc0c2fa2349f2ec02009669c5961a0748894c94e7a902506d6ae995",
+      "mode": 420
+    },
+    "third_party/opencv_ios_source.BUILD": {
+      "sha256": "0b6e0582ea51aac2f9e68a48369ff59b7e0384c49c1ce6e78a89b36ba4b52d8b",
+      "mode": 420
+    }
+  }
+}

@@ -1,0 +1,164 @@
+diff --git a/MODULE.bazel b/MODULE.bazel
+index 5055a7f..651b45d 100644
+--- a/MODULE.bazel
++++ b/MODULE.bazel
+@@ -53,6 +53,8 @@ bazel_dep(name = "abseil-cpp", repo_name = "com_google_absl")
+ archive_override(
+     module_name = "abseil-cpp",
+     strip_prefix = "abseil-cpp-20260526.0",
++    patches = ["//third_party:find_wig_abseil_apple_strict_header_ownership.patch"],
++    patch_strip = 1,
+     urls = ["https://github.com/abseil/abseil-cpp/releases/download/20260526.0/abseil-cpp-20260526.0.tar.gz"],
+ )
+ 
+diff --git a/mediapipe/calculators/tensor/BUILD b/mediapipe/calculators/tensor/BUILD
+index 86c82d1..8be64b1 100644
+--- a/mediapipe/calculators/tensor/BUILD
++++ b/mediapipe/calculators/tensor/BUILD
+@@ -876,6 +876,7 @@ cc_library(
+         "@com_google_absl//absl/algorithm:container",
+         "@com_google_absl//absl/base:core_headers",
+         "@com_google_absl//absl/base:nullability",
++        "@com_google_absl//absl/cleanup",
+         "@com_google_absl//absl/container:flat_hash_map",
+         "@com_google_absl//absl/log",
+         "@com_google_absl//absl/log:absl_log",
+diff --git a/mediapipe/calculators/tensor/inference_runner_litert.cc b/mediapipe/calculators/tensor/inference_runner_litert.cc
+index f1933b0..c936bd1 100644
+--- a/mediapipe/calculators/tensor/inference_runner_litert.cc
++++ b/mediapipe/calculators/tensor/inference_runner_litert.cc
+@@ -22,6 +22,7 @@
+ 
+ #include "absl/algorithm/container.h"   // from @com_google_absl
+ #include "absl/base/nullability.h"      // from @com_google_absl
++#include "absl/cleanup/cleanup.h"  // from @com_google_absl
+ #include "absl/log/absl_log.h"          // from @com_google_absl
+ #include "absl/log/log.h"               // from @com_google_absl
+ #include "absl/status/status.h"         // from @com_google_absl
+diff --git a/mediapipe/tasks/ios/BUILD b/mediapipe/tasks/ios/BUILD
+index 548c9f5..028bdba 100644
+--- a/mediapipe/tasks/ios/BUILD
++++ b/mediapipe/tasks/ios/BUILD
+@@ -111,7 +111,6 @@ CALCULATORS_AND_GRAPHS = [
+     "//mediapipe/tasks/cc/vision/image_classifier:image_classifier_graph",
+     "//mediapipe/tasks/cc/vision/image_embedder:image_embedder_graph",
+     "//mediapipe/tasks/cc/vision/image_segmenter:image_segmenter_graph",
+-    "//mediapipe/tasks/cc/vision/interactive_segmenter:interactive_segmenter_graph",
+     "//mediapipe/tasks/cc/vision/interactive_segmenter_legacy:interactive_segmenter_legacy_graph",
+     "//mediapipe/tasks/cc/vision/object_detector:object_detector_graph",
+     "//mediapipe/tasks/cc/vision/pose_landmarker:pose_landmarker_graph",
+@@ -150,11 +149,6 @@ MEDIAPIPE_TASKS_COMMON_DEPS = TENSORFLOW_LITE_C_DEPS + [
+     ":OpenCV",
+     "//mediapipe/gpu:metal_shared_resources",
+     "//mediapipe/tasks/ios/audio/audio_classifier:MPPAudioClassifier",
+-    "//mediapipe/tasks/ios/retrieval/semantic_retriever:MPPAudioLoader",
+-    "//mediapipe/tasks/ios/retrieval/semantic_retriever:MPPDefaultTextChunker",
+-    "//mediapipe/tasks/ios/retrieval/semantic_retriever:MPPSemanticRetriever",
+-    "//mediapipe/tasks/ios/retrieval/semantic_retriever:MPPSqliteVectorStore",
+-    "//mediapipe/tasks/ios/retrieval/universal_embedder:MPPUniversalEmbedder",
+     "//mediapipe/tasks/ios/text/language_detector:MPPLanguageDetector",
+     "//mediapipe/tasks/ios/text/text_classifier:MPPTextClassifier",
+     "//mediapipe/tasks/ios/text/text_embedder:MPPTextEmbedder",
+@@ -167,7 +161,6 @@ MEDIAPIPE_TASKS_COMMON_DEPS = TENSORFLOW_LITE_C_DEPS + [
+     "//mediapipe/tasks/ios/vision/image_embedder:MPPImageEmbedder",
+     "//mediapipe/tasks/ios/vision/image_segmenter:MPPImageSegmenter",
+     "//mediapipe/tasks/ios/vision/interactive_segmenter_legacy:MPPInteractiveSegmenterLegacy",
+-    "//mediapipe/tasks/ios/vision/interactive_segmenter:MPPInteractiveSegmenter",
+     "//mediapipe/tasks/ios/vision/object_detector:MPPObjectDetector",
+     "//mediapipe/tasks/ios/vision/pose_landmarker:MPPPoseLandmarker",
+     "//mediapipe/tasks/ios/text/text_proofreader:MPPTextProofreader",
+@@ -265,9 +258,6 @@ strip_api_include_path_prefix(
+         "//mediapipe/tasks/ios/vision/interactive_segmenter_legacy:sources/MPPInteractiveSegmenterLegacy.h",
+         "//mediapipe/tasks/ios/vision/interactive_segmenter_legacy:sources/MPPInteractiveSegmenterLegacyOptions.h",
+         "//mediapipe/tasks/ios/vision/interactive_segmenter_legacy:sources/MPPInteractiveSegmenterLegacyResult.h",
+-        "//mediapipe/tasks/ios/vision/interactive_segmenter:sources/MPPInteractiveSegmenter.h",
+-        "//mediapipe/tasks/ios/vision/interactive_segmenter:sources/MPPInteractiveSegmenterOptions.h",
+-        "//mediapipe/tasks/ios/vision/interactive_segmenter:sources/MPPStroke.h",
+         "//mediapipe/tasks/ios/vision/object_detector:sources/MPPObjectDetector.h",
+         "//mediapipe/tasks/ios/vision/object_detector:sources/MPPObjectDetectorOptions.h",
+         "//mediapipe/tasks/ios/vision/object_detector:sources/MPPObjectDetectorResult.h",
+@@ -422,9 +412,6 @@ mediapipe_static_xcframework(
+         ":MPPInteractiveSegmenterLegacy.h",
+         ":MPPInteractiveSegmenterLegacyOptions.h",
+         ":MPPInteractiveSegmenterLegacyResult.h",
+-        ":MPPInteractiveSegmenter.h",
+-        ":MPPInteractiveSegmenterOptions.h",
+-        ":MPPStroke.h",
+         ":MPPHandLandmarker.h",
+         ":MPPHandLandmarkerOptions.h",
+         ":MPPHandLandmarkerResult.h",
+diff --git a/mediapipe/tasks/ios/ios_build_rules.bzl b/mediapipe/tasks/ios/ios_build_rules.bzl
+index 1174f9e..d9e3d33 100644
+--- a/mediapipe/tasks/ios/ios_build_rules.bzl
++++ b/mediapipe/tasks/ios/ios_build_rules.bzl
+@@ -179,6 +179,7 @@ def mediapipe_static_xcframework(
+         kwargs["ios"] = {
+             "simulator": [
+                 "arm64",
++                "x86_64",
+             ],
+             "device": ["arm64"],
+         }
+diff --git a/mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm b/mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm
+index 413b295..4eed5de 100644
+--- a/mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm
++++ b/mediapipe/tasks/ios/vision/face_landmarker/utils/sources/MPPFaceLandmarkerOptions+Helpers.mm
+@@ -37,7 +37,8 @@ - (void)copyToProto:(CalculatorOptionsProto *)optionsProto {
+ 
+   faceLandmarkerGraphOptions->Clear();
+ 
+-  [self.baseOptions copyToProto:faceLandmarkerGraphOptions->mutable_base_options()];
++  [self.baseOptions copyToProto:faceLandmarkerGraphOptions->mutable_base_options()
++             withUseStreamMode:self.runningMode != MPPRunningModeImage];
+   faceLandmarkerGraphOptions->set_min_tracking_confidence(self.minTrackingConfidence);
+ 
+   FaceLandmarksDetectorGraphOptionsProto *faceLandmarkerDetectorGraphOptions =
+diff --git a/third_party/BUILD b/third_party/BUILD
+index 4b035dc..bfd3dc7 100644
+--- a/third_party/BUILD
++++ b/third_party/BUILD
+@@ -369,3 +369,8 @@ cc_library(
+     srcs = [":libc++_shared.so"],
+     alwayslink = 1,
+ )
++
++exports_files(["find_wig_source_built_opencv.zip"], visibility = ["//visibility:public"])
++
++
++exports_files(["find_wig_abseil_apple_strict_header_ownership.patch"], visibility = ["//visibility:public"])
+diff --git a/third_party/opencv_ios_source.BUILD b/third_party/opencv_ios_source.BUILD
+index 5dadc00..79d8742 100644
+--- a/third_party/opencv_ios_source.BUILD
++++ b/third_party/opencv_ios_source.BUILD
+@@ -29,29 +29,9 @@ exports_files(["LICENSE"])
+ # is mentioned in an open issue in the opencv github repo.
+ genrule(
+     name = "build_opencv_xcframework",
+-    srcs = glob(["opencv-4.5.3/**"]),
++    srcs = ["@//third_party:find_wig_source_built_opencv.zip"],
+     outs = ["opencv2.xcframework.zip"],
+-    cmd = "&&".join([
+-        "$(location opencv-4.5.3/platforms/apple/build_xcframework.py) \
+-        --iphonesimulator_archs arm64,x86_64 \
+-        --iphoneos_archs arm64 \
+-        --without dnn \
+-        --without ml \
+-        --without stitching \
+-        --without photo \
+-        --without objdetect \
+-        --without gapi \
+-        --without flann \
+-        --without highgui \
+-        --without videoio \
+-        --disable PROTOBUF \
+-        --disable-bitcode \
+-        --disable-swift \
+-        --build_only_specified_archs \
+-        --out $(@D)",
+-        "cd $(@D)",
+-        "zip --symlinks -r opencv2.xcframework.zip opencv2.xcframework",
+-    ]),
++    cmd = "cp $(location @//third_party:find_wig_source_built_opencv.zip) $@",
+ )
+ 
+ # Unzips `opencv2.xcframework.zip` built from source by `build_opencv_xcframework`

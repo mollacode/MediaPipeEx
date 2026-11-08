@@ -1,0 +1,19 @@
+--- a/absl/log/internal/BUILD.bazel
++++ b/absl/log/internal/BUILD.bazel
+@@ -188,7 +188,15 @@
+ cc_library(
+     name = "log_message",
+     srcs = ["log_message.cc"],
+-    hdrs = ["log_message.h"],
++    # Xcode 26.2 host strict-decluse requires explicit ownership of these
++    # existing direct dependency headers; retain layering_check and C++ bytes.
++    hdrs = ["log_message.h"] + select({
++        "@platforms//os:osx": [
++            "//absl/base:internal/errno_saver.h",
++            "//absl/base:log_severity.h",
++        ],
++        "//conditions:default": [],
++    }),
+     copts = ABSL_DEFAULT_COPTS,
+     linkopts = ABSL_DEFAULT_LINKOPTS,
+     visibility = [

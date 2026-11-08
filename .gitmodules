@@ -1,0 +1,4 @@
+[submodule "upstream-1.2.2"]
+	path = 1.2.2/source/upstream
+	url = https://github.com/google-ai-edge/mediapipe.git
+	shallow = true

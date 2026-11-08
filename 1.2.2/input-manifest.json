@@ -1,0 +1,45 @@
+{
+  "task_id": "20261105-2238_all_dependencies_upgrade",
+  "inputs": [
+    {
+      "name": "mediapipe-core",
+      "path": "MediaPipe/1.2.2/android/inputs/tasks-core-1.2.2.aar",
+      "url": "https://dl.google.com/dl/android/maven2/com/google/mediapipe/tasks-core/1.2.2/tasks-core-1.2.2.aar",
+      "bytes": 32145407,
+      "sha256": "7ed8d0d473af0ad62914401226199f595683001a6930f0f46a0d32af70eeb048",
+      "verified_upstream_checksum": false
+    },
+    {
+      "name": "mediapipe-vision",
+      "path": "MediaPipe/1.2.2/android/inputs/tasks-vision-1.2.2.aar",
+      "url": "https://dl.google.com/dl/android/maven2/com/google/mediapipe/tasks-vision/1.2.2/tasks-vision-1.2.2.aar",
+      "bytes": 485698,
+      "sha256": "114b3dce25bbafa0f93904a2294cdc3576b415c879ed60bb1aa945183d0dee08",
+      "verified_upstream_checksum": false
+    },
+    {
+      "name": "mediapipe-ios-common",
+      "path": "MediaPipe/1.2.2/ios/inputs/MediaPipeTasksCommon-1.2.2.xcframework.zip",
+      "url": "https://dl.google.com/cpdc/20261102-135238/MediaPipeTasksCommon-1.2.2.xcframework.zip",
+      "bytes": 8960140,
+      "sha256": "3ed9b3dab1008549c60cfe994a7601a3aa5f45e84dc4542c7996d840230bb47a",
+      "verified_upstream_checksum": true
+    },
+    {
+      "name": "mediapipe-ios-graphs",
+      "path": "MediaPipe/1.2.2/ios/inputs/MediaPipeTaskGraphs-1.2.2.xcframework.zip",
+      "url": "https://dl.google.com/cpdc/20261102-135238/MediaPipeTaskGraphs-1.2.2.xcframework.zip",
+      "bytes": 93388871,
+      "sha256": "eaf541888b07d5e748d93c9d1d76ee3d2418281b0bd38973d1818fb2805c4723",
+      "verified_upstream_checksum": true
+    },
+    {
+      "name": "mediapipe-ios-vision",
+      "path": "MediaPipe/1.2.2/ios/inputs/MediaPipeTasksVision-1.2.2.xcframework.zip",
+      "url": "https://dl.google.com/cpdc/20261102-135238/MediaPipeTasksVision-1.2.2.xcframework.zip",
+      "bytes": 525694,
+      "sha256": "6432a8780c5147211181039b3f9e4e1925b405e0460d43665a5510d0a941b554",
+      "verified_upstream_checksum": false
+    }
+  ]
+}

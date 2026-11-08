@@ -1,0 +1,43 @@
+diff --git a/absl/log/internal/BUILD.bazel b/absl/log/internal/BUILD.bazel
+--- a/absl/log/internal/BUILD.bazel
++++ b/absl/log/internal/BUILD.bazel
+@@ -188,7 +188,7 @@
+ cc_library(
+     name = "log_message",
+     srcs = ["log_message.cc"],
+-    hdrs = ["log_message.h"],
++    hdrs = ["log_message.h", "//absl/base:internal/errno_saver.h", "//absl/base:log_severity.h"],
+     copts = ABSL_DEFAULT_COPTS,
+     linkopts = ABSL_DEFAULT_LINKOPTS,
+     visibility = [
+diff --git a/absl/container/BUILD.bazel b/absl/container/BUILD.bazel
+--- a/absl/container/BUILD.bazel
++++ b/absl/container/BUILD.bazel
+@@ -742,10 +742,12 @@
+ cc_library(
+     name = "raw_hash_set",
+     srcs = ["internal/raw_hash_set.cc"],
+-    hdrs = ["internal/raw_hash_set.h"],
+-    copts = ABSL_DEFAULT_COPTS,
+-    linkopts = ABSL_DEFAULT_LINKOPTS,
+-    deps = [
++    hdrs = ["internal/raw_hash_set.h", "//absl/base:internal/raw_logging.h"],
++    copts = ABSL_DEFAULT_COPTS,
++    linkopts = ABSL_DEFAULT_LINKOPTS,
++    deps = [
++        "//absl/base:atomic_hook",
++        "//absl/base:log_severity",
+         ":common",
+         ":common_policy_traits",
+         ":compressed_tuple",
+diff --git a/absl/flags/BUILD.bazel b/absl/flags/BUILD.bazel
+--- a/absl/flags/BUILD.bazel
++++ b/absl/flags/BUILD.bazel
+@@ -216,6 +216,7 @@
+     hdrs = [
+         "internal/flag.h",
+         "internal/sequence_lock.h",
++        "//absl/meta:type_traits.h",
+     ],
+     copts = ABSL_DEFAULT_COPTS,
+     linkopts = ABSL_DEFAULT_LINKOPTS,

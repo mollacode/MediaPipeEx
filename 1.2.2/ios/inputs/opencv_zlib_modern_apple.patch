@@ -1,0 +1,33 @@
+diff --git a/opencv-4.5.3/3rdparty/zlib/zutil.h b/opencv-4.5.3/3rdparty/zlib/zutil.h
+--- a/opencv-4.5.3/3rdparty/zlib/zutil.h
++++ b/opencv-4.5.3/3rdparty/zlib/zutil.h
+@@ -130,7 +130,7 @@
+ #  endif
+ #endif
+ 
+-#if defined(MACOS) || defined(TARGET_OS_MAC)
++#if defined(MACOS)
+ #  define OS_CODE  7
+ #  ifndef Z_SOLO
+ #    if defined(__MWERKS__) && __dest_os != __be_os && __dest_os != __win32_os
+diff --git a/opencv-4.5.3/3rdparty/libpng/pngpriv.h b/opencv-4.5.3/3rdparty/libpng/pngpriv.h
+--- a/opencv-4.5.3/3rdparty/libpng/pngpriv.h
++++ b/opencv-4.5.3/3rdparty/libpng/pngpriv.h
+@@ -518,7 +518,7 @@
+ #  include <float.h>
+ 
+ #  if (defined(__MWERKS__) && defined(macintosh)) || defined(applec) || \
+-    defined(THINK_C) || defined(__SC__) || defined(TARGET_OS_MAC)
++    defined(THINK_C) || defined(__SC__)
+    /* We need to check that <math.h> hasn't already been included earlier
+     * as it seems it doesn't agree with <fp.h>, yet we should really use
+     * <fp.h> if possible.
+diff --git a/opencv-4.5.3/modules/features2d/misc/objc/gen_dict.json b/opencv-4.5.3/modules/features2d/misc/objc/gen_dict.json
+--- a/opencv-4.5.3/modules/features2d/misc/objc/gen_dict.json
++++ b/opencv-4.5.3/modules/features2d/misc/objc/gen_dict.json
+@@ -1,4 +1,5 @@
+ {
++    "class_ignore_list" : ["FlannBasedMatcher"],
+     "enum_fix" : {
+         "FastFeatureDetector" : { "DetectorType": "FastDetectorType" },
+         "AgastFeatureDetector" : { "DetectorType": "AgastDetectorType" }

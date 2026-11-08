@@ -1,0 +1,12 @@
+Find Wig derivative of MediaPipe v1.2.2
+Upstream commit: 2c2d4a7454d6358e0d6f0b54e254d231fe4cc78f
+Upstream source license and third-party notices remain in source/upstream.
+
+iOS: Face Landmarker VIDEO stream-mode configuration and public-source build
+compatibility (simulator architecture, unavailable/private API isolation,
+Abseil header ownership, direct cleanup dependency, local OpenCV input).
+Android: a deterministic tasks-core reconstruction recipe replaces remote
+metrics logger implementation with the public no-op logger factory interface.
+This repository contains source and recipes only, not compiled frameworks,
+downloaded inputs, or models. Source licensing does not replace MediaPipe
+Solution API or model terms. No upstream endorsement is implied.
